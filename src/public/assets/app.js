@@ -479,18 +479,17 @@ if (typeof module != "undefined" && typeof module.exports != "undefined") module
 "use strict;"
 if (typeof Project == 'undefined') Project = {};
 if (typeof Project.App == 'undefined') Project.App = {};
-if (typeof Project.App.Frontend == 'undefined') Project.App.Frontend = {};
-Project.App.Frontend.ModuleDescription = function()
+Project.App.ModuleDescription = function()
 {
 };
-Object.assign(Project.App.Frontend.ModuleDescription.prototype,
+Object.assign(Project.App.ModuleDescription.prototype,
 {
 });
-Object.assign(Project.App.Frontend.ModuleDescription,
+Object.assign(Project.App.ModuleDescription,
 {
 	getModuleName: function()
 	{
-		return "Project.App.Frontend";
+		return "Project.App";
 	},
 	getModuleVersion: function()
 	{
@@ -507,11 +506,11 @@ Object.assign(Project.App.Frontend.ModuleDescription,
 	/* ======================= Class Init Functions ======================= */
 	getNamespace: function()
 	{
-		return "Project.App.Frontend";
+		return "Project.App";
 	},
 	getClassName: function()
 	{
-		return "Project.App.Frontend.ModuleDescription";
+		return "Project.App.ModuleDescription";
 	},
 	getParentClassName: function()
 	{
@@ -548,6 +547,6 @@ Object.assign(Project.App.Frontend.ModuleDescription,
 		return null;
 	},
 });
-Runtime.rtl.defClass(Project.App.Frontend.ModuleDescription);
-window["Project.App.Frontend.ModuleDescription"] = Project.App.Frontend.ModuleDescription;
-if (typeof module != "undefined" && typeof module.exports != "undefined") module.exports = Project.App.Frontend.ModuleDescription;
+Runtime.rtl.defClass(Project.App.ModuleDescription);
+window["Project.App.ModuleDescription"] = Project.App.ModuleDescription;
+if (typeof module != "undefined" && typeof module.exports != "undefined") module.exports = Project.App.ModuleDescription;

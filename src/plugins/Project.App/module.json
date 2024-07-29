@@ -6,7 +6,7 @@
         "Frontend/Components/IndexPage/IndexPageModel.bay",
         "Frontend/Components/NotFoundPage/NotFoundPage.bay",
         "Frontend/Components/NotFoundPage/NotFoundPageModel.bay",
-        "Frontend/ModuleDescription.bay"
+        "ModuleDescription.bay"
     ],
     "require": [
         "Runtime",

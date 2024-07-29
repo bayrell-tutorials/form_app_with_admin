@@ -4,7 +4,7 @@
 
 <class name="Project.App.Frontend.Components.Blocks.Scripts">
 
-<use name="Project.App.Frontend.ModuleDescription" />
+<use name="Project.App.ModuleDescription" />
 
 <template>
 	<script type='text/javascript' id='vue-runtime-js'

@@ -2,8 +2,8 @@
 return function($loader)
 {
 	/* Add modules */
-	$loader->modules[] = "Project.App.Frontend";
-	$loader->modules[] = "Project.Admin.Frontend";
+	$loader->modules[] = "Project.App";
+	//$loader->modules[] = "Project.Admin";
 	
 	/* Enable constructor */
 	if (isset($_SERVER["CONSTRUCTOR"]))
