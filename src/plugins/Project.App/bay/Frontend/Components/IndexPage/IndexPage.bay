@@ -1,0 +1,33 @@
+<class name="Project.App.Frontend.Components.IndexPage.IndexPage">
+
+<use name="Runtime.Widget.Container" component="true" />
+<use name="Runtime.Widget.Form.Form" component="true" />
+<use name="Runtime.Widget.Text" component="true" />
+
+<style>
+.header{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 0px;
+	padding-right: 0px;
+	max-width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.page_title{
+	margin-bottom: 10px;
+	text-align: center;
+}
+</style>
+
+<template>
+	<div class="main_page">
+		<Container class="header">
+			<Text tag="h1" content="Оставьте заявку" class="page_title page_title" />
+			<Form class="main_form" @model={{ this.model.main_form }}>
+			</Form>
+		</Container>
+	</div>
+</template>
+
+</class>

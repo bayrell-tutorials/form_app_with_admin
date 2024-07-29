@@ -1,0 +1,41 @@
+namespace Project.App.Backend.Database;
+
+use Runtime.re;
+use Runtime.BaseStruct;
+use Runtime.DateTime;
+use Runtime.ORM.DatabaseSchema;
+use Runtime.ORM.Relation;
+use Runtime.ORM.Annotations.AutoIncrement;
+use Runtime.ORM.Annotations.BigIntType;
+use Runtime.ORM.Annotations.BooleanType;
+use Runtime.ORM.Annotations.CollectionType;
+use Runtime.ORM.Annotations.DateTimeType;
+use Runtime.ORM.Annotations.DictType;
+use Runtime.ORM.Annotations.ForeignKey;
+use Runtime.ORM.Annotations.Index;
+use Runtime.ORM.Annotations.JsonType;
+use Runtime.ORM.Annotations.Primary;
+use Runtime.ORM.Annotations.StringType;
+use Runtime.ORM.Annotations.Table;
+use Runtime.ORM.Annotations.TinyIntType;
+use Runtime.ORM.Annotations.Unique;
+
+
+class Schema extends DatabaseSchema
+{
+	/**
+	 * Forms data
+	 */
+	@Table{ "name": "forms_data" }
+	pure memorize Collection<BaseStruct> forms_data() =>
+	[
+		/* Fields */
+		new BigIntType{"name": "id"},
+		new JsonType{"name": "data"},
+		new DateTimeType{"name": "gmtime_add"},
+		
+		/* Index */
+		new AutoIncrement{"name": "id"},
+		new Primary{"keys": ["id"]},
+	];
+}

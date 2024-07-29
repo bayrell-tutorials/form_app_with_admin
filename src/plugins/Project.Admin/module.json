@@ -1,0 +1,23 @@
+{
+    "name": "Project.Admin",
+    "assets": [
+        "Frontend/ModuleDescription.bay",
+        "Frontend/AdminPage/AdminPageModel.bay",
+        "Frontend/AdminPage/AdminPage.bay"
+    ],
+    "require": [
+        "Runtime",
+        "Runtime.Web"
+    ],
+    "groups": [
+        "app"
+    ],
+    "src": ".\/bay",
+    "dest": {
+        "php": ".\/php",
+        "es6": ".\/es6"
+    },
+    "allow": [
+        "\\.bay$"
+    ]
+}

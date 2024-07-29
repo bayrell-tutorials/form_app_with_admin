@@ -1,0 +1,26 @@
+{
+    "name": "Project.App",
+    "assets": [
+        "Frontend/Components/Blocks/CSS.bay",
+        "Frontend/Components/IndexPage/IndexPage.bay",
+        "Frontend/Components/IndexPage/IndexPageModel.bay",
+        "Frontend/Components/NotFoundPage/NotFoundPage.bay",
+        "Frontend/Components/NotFoundPage/NotFoundPageModel.bay",
+        "Frontend/ModuleDescription.bay"
+    ],
+    "require": [
+        "Runtime",
+        "Runtime.Web"
+    ],
+    "groups": [
+        "app"
+    ],
+    "src": ".\/bay",
+    "dest": {
+        "php": ".\/php",
+        "es6": ".\/es6"
+    },
+    "allow": [
+        "\\.bay$"
+    ]
+}

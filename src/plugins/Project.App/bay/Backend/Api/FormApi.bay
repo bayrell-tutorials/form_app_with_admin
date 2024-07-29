@@ -1,0 +1,58 @@
+namespace Project.App.Backend.Api;
+
+use Runtime.DateTime;
+use Runtime.Exceptions.ApiError;
+use Runtime.Exceptions.ItemNotFound;
+use Runtime.Exceptions.RuntimeException;
+use Runtime.ORM.Connection;
+use Runtime.ORM.Relation;
+use Runtime.Web.Annotations.ApiMethod;
+use Runtime.Widget.Crud.SaveApi;
+use Runtime.Widget.Crud.Rules.CrudRule;
+use Runtime.Widget.Crud.Rules.Required;
+
+
+class FormApi extends SaveApi
+{
+	/**
+	 * Returns api name
+	 */
+	static string getApiName() => "app.form::save";
+	
+	
+	/**
+	 * Returns rules
+	 */
+	Vector<CrudRule> getRules() =>
+	[
+		new Required{"name": "name"},
+		new Required{"name": "email"},
+		new Required{"name": "phone"},
+	];
+	
+	
+	/**
+	 * Action save
+	 */
+	@ApiMethod
+	async void actionSave()
+	{
+		/* Load data */
+		await this.loadData();
+		
+		/* Get data */
+		Dict data = this.data.intersect(["name", "email", "phone", "question"]);
+
+		/* Create form data */
+		Relation form_data = new Relation("forms_data");
+		form_data.set("data", data);
+		form_data.set("gmtime_add", DateTime::now());
+		
+		/* Save to database */
+		Connection conn = Connection::get();
+		form_data.save(conn);
+		
+		/* Success */
+		this.success();
+	}
+}

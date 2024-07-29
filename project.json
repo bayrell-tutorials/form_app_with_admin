@@ -1,0 +1,53 @@
+{
+    "name": "Form App",
+    "description": "BayLang example app with admin page made by web constructor",
+    "type": "php_website",
+    "languages": [
+        "php",
+        "es6"
+    ],
+    "entry_points": [
+        {
+            "url": "\/",
+            "file": "index.php",
+            "entry_point": "Runtime.Web.BaseApp",
+            "modules": [
+                "App"
+            ]
+        }
+    ],
+    "modules": [
+        {
+            "src": "src\/plugins",
+            "type": "folder"
+        }
+    ],
+    "assets": [
+        {
+            "type": "js",
+            "dest": "src\/public\/assets\/app.js",
+            "modules": [
+                "@app"
+            ]
+        },
+        {
+            "type": "js",
+            "dest": "src\/public\/assets\/runtime.js",
+            "modules": [
+                "@runtime",
+                "@widget"
+            ]
+        },
+        {
+            "type": "js",
+            "dest": "src\/public\/assets\/test.js",
+            "modules": [
+                "@test"
+            ]
+        }
+    ],
+    "exclude": [],
+    "domains": [
+        "test.docker0"
+    ]
+}

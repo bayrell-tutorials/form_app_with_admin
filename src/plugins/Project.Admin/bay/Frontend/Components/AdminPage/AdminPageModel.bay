@@ -1,0 +1,19 @@
+namespace Project.Admin.Frontend.Components.AdminPage;
+
+use Runtime.Web.BasePageModel;
+use Runtime.Web.RenderContainer;
+use Project.Admin.Frontend.Components.AdminPage.AdminPage;
+
+
+class AdminPageModel extends BasePageModel
+{
+	string component = classof AdminPage;
+	void initWidget(Dict params)
+	{
+		parent(params);
+	}
+	void buildTitle(RenderContainer container)
+	{
+		this.layout.setPageTitle("Widget page");
+	}
+}

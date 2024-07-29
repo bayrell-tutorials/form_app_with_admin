@@ -1,0 +1,22 @@
+namespace Project.Admin.Frontend;
+
+use Runtime.Web.Annotations.Route;
+use Runtime.Web.Annotations.Widget;
+
+class ModuleDescription
+{
+	pure string getModuleName() => "Project.Admin.Frontend";
+	pure string getModuleVersion() => "0.0.1";
+	pure Dict<string> requiredModules() =>
+	{
+		"Runtime.Web": "*",
+		"Runtime.Widget": "*",
+	};
+	pure Collection<Dict> entities() =>
+	[
+		#ifdef BACKEND then
+		new Route("Project.Admin.Frontend.Routes"),
+		#endif
+		new Widget("Project.Admin.Frontend.Components.AdminPage.AdminPageModel"),
+	];
+}

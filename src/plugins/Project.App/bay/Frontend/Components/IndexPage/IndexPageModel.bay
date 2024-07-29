@@ -1,0 +1,57 @@
+namespace Project.App.Frontend.Components.IndexPage;
+
+use Runtime.Entity.Factory;
+use Runtime.Web.BasePageModel;
+use Runtime.Web.RenderContainer;
+use Runtime.Widget.Form.FormSubmitModel;
+use Project.App.Frontend.Components.IndexPage.IndexPage;
+
+
+class IndexPageModel extends BasePageModel
+{
+	string component = classof IndexPage;
+	FormSubmitModel main_form = null;
+	void initWidget(Dict params)
+	{
+		parent(params);
+		this.main_form = this.addWidget("Runtime.Widget.Form.FormSubmitModel", {
+			"widget_name": "main_form",
+			"storage": new Factory("Runtime.Widget.Form.FormSubmitStorage", {
+				"api_name": "app.form::save",
+			}),
+			"submit_button": {
+				"text": "Отправить заявку",
+			},
+			"fields": [
+				{
+					"name": "name",
+					"label": "Name",
+					"component": "Runtime.Widget.Input",
+				},
+				{
+					"name": "email",
+					"label": "E-mail",
+					"component": "Runtime.Widget.Input",
+				},
+				{
+					"name": "phone",
+					"label": "Phone",
+					"component": "Runtime.Widget.Input",
+				},
+				{
+					"name": "question",
+					"label": "Question",
+					"component": "Runtime.Widget.TextArea",
+					"props":
+					{
+						"height": "200px",
+					}
+				},
+			],
+		});
+	}
+	void buildTitle(RenderContainer container)
+	{
+		this.layout.setPageTitle("Index page");
+	}
+}

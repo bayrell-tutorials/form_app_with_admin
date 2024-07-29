@@ -1,0 +1,29 @@
+namespace Project.App.Backend;
+
+use Runtime.Entity.Hook;
+use Runtime.ORM.Annotations.Database;
+use Runtime.ORM.Factory.MySQLFactory;
+use Runtime.Web.Annotations.Api;
+
+
+class ModuleDescription
+{
+	pure string getModuleName() => "Project.App.Backend";
+	pure string getModuleVersion() => "0.0.1";
+	pure Dict<string> requiredModules() =>
+	{
+		"Runtime.ORM": "*",
+	};
+	pure Collection<Dict> entities() =>
+	[
+		new Api("Project.App.Backend.Api.FormApi"),
+		new Database("Project.App.Backend.Database.Schema"),
+		new MySQLFactory({
+			"name": "default",
+			"host": @.env("MYSQL_HOST"),
+			"login": @.env("MYSQL_LOGIN"),
+			"password": @.env("MYSQL_PASSWORD"),
+			"database": @.env("MYSQL_DATABASE"),
+		}),
+	];
+}

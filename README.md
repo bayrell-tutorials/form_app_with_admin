@@ -1,2 +1,3 @@
-# form_app_with_admin
-Wep app with admin
+# Wep app with admin
+
+BayLang example app with admin page made by web constructor
