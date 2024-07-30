@@ -1,0 +1,14 @@
+{
+	"name": "Project.Database",
+	"assets":
+	[
+	],
+	"src": ".\/bay",
+	"dest": {
+		"php": ".\/php",
+		"es6": ".\/es6"
+	},
+	"allow": [
+		"\\.bay$"
+	]
+}

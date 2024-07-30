@@ -1,0 +1,114 @@
+namespace Project.Admin.Backend.Api;
+
+use Runtime.Exceptions.ApiError;
+use Runtime.Exceptions.RuntimeException;
+use Runtime.Crypt.Password;
+use Runtime.Crypt.JWT;
+use Runtime.ORM.Connection;
+use Runtime.ORM.Query;
+use Runtime.Web.Annotations.ApiMethod;
+use Runtime.Web.Cookie;
+use Runtime.Widget.Crud.SaveApi;
+use Runtime.Widget.Crud.Rules.CrudRule;
+use Runtime.Widget.Crud.Rules.Required;
+
+
+class LoginApi extends SaveApi
+{
+	/**
+	 * Returns api name
+	 */
+	static string getApiName() => "admin.login";
+	
+	
+	/**
+	 * Returns rules
+	 */
+	Vector<CrudRule> getRules() =>
+	[
+		new Required{"name": "login"},
+		new Required{"name": "password"},
+	];
+	
+	
+	/**
+	 * Login error
+	 */
+	void loginError()
+	{
+		throw new ApiError(new RuntimeException("Unknown login or password"));
+	}
+	
+	
+	/**
+	 * Action login
+	 */
+	@ApiMethod
+	async void actionLogin()
+	{
+		this.loadData();
+		
+		string login = this.data.get("login");
+		string password = this.data.get("password");
+		
+		/* Build query */
+		Query q = new Query()
+			.select([
+				"admin_users.id",
+				"admin_users.login",
+				"admin_users.password",
+			])
+			.from("admin_users")
+			.where("login", "=", login)
+		;
+		
+		/* Find user */
+		Connection conn = Connection::get();
+		Dict user = conn.fetchOne(q);
+		if (not user)
+		{
+			this.loginError();
+		}
+		
+		/* Check password */
+		string hash = user.get("password");
+		if (not Password::verify(password, hash))
+		{
+			this.loginError();
+		}
+		
+		/* Set cookie */
+		string jwt_secret_key = @.env("JWT_SECRET_KEY");
+		Dict data = {
+			"id": user.get("id"),
+			"login": user.get("login"),
+		};
+		string jwt = JWT::encode(data, jwt_secret_key, "RS256");
+		Cookie cookie = new Cookie{
+			"name": "admin_auth",
+			"value": jwt,
+		};
+		this.result.addCookie(cookie);
+		
+		/* Success */
+		this.success();
+	}
+
+
+	/**
+	 * Action logout
+	 */
+	@ApiMethod
+	async void actionLogout()
+	{
+		Cookie cookie = new Cookie{
+			"name": "admin_auth",
+			"value": "",
+			"expires": 0,
+		};
+		this.result.addCookie(cookie);
+		
+		/* Success */
+		this.success();
+	}
+}

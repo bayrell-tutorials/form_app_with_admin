@@ -1,0 +1,24 @@
+<class name="Project.Admin.Frontend.Components.Layout.DefaultLayout"
+	extends="Runtime.Web.DefaultLayout"
+>
+
+<style>
+body, html {
+	font-family: var(--widget-font-family);
+	font-size: var(--widget-font-size);
+	line-height: var(--widget-line-height);
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+</style>
+
+
+<template>
+	<div class="layout" class={{ "layout--" ~ this.layout.layout_name }}>
+		%render this.renderCurrentPage();
+	</div>
+</template>
+
+
+</class>

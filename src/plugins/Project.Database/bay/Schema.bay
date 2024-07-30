@@ -1,4 +1,4 @@
-namespace Project.App.Backend.Database;
+namespace Project.Database;
 
 use Runtime.re;
 use Runtime.BaseStruct;
@@ -23,6 +23,23 @@ use Runtime.ORM.Annotations.Unique;
 
 class Schema extends DatabaseSchema
 {
+	/**
+	 * Admin users
+	 */
+	@Table{ "name": "admin_users" }
+	pure memorize Collection<BaseStruct> admin_users() =>
+	[
+		/* Fields */
+		new BigIntType{"name": "id"},
+		new StringType{"name": "login"},
+		new StringType{"name": "password"},
+		
+		/* Index */
+		new AutoIncrement{"name": "id"},
+		new Primary{"keys": ["id"]},
+	];
+	
+	
 	/**
 	 * Forms data
 	 */

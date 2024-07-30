@@ -7,6 +7,10 @@
         "Components\/FormData\/FormData.bay",
         "Components\/Layout\/AdminLayout.bay",
         "Components\/Layout\/AdminLayoutModel.bay",
+        "Components\/Layout\/DefaultLayout.bay",
+        "Components\/Layout\/DefaultLayoutModel.bay",
+        "Components\/LoginPage\/LoginPage.bay",
+        "Components\/LoginPage\/LoginPageModel.bay",
         "ModuleDescription.bay"
     ],
     "require": [

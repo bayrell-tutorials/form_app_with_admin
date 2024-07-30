@@ -12,10 +12,11 @@ class ModuleDescription
 	pure string getModuleVersion() => "0.0.1";
 	pure Dict<string> requiredModules() =>
 	{
-		"Runtime.ORM": "*",
+		"Project.Database": "*",
 	};
 	pure Collection<Dict> entities() =>
 	[
 		new Api("Project.Admin.Backend.Api.FormSearchApi"),
+		new Api("Project.Admin.Backend.Api.LoginApi"),
 	];
 }

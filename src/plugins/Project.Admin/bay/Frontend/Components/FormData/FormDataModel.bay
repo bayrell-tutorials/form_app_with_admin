@@ -165,6 +165,6 @@ class FormDataModel extends BasePageModel
 	}
 	void buildTitle(RenderContainer container)
 	{
-		this.layout.setPageTitle("Widget page");
+		this.layout.setPageTitle("Form data page");
 	}
 }

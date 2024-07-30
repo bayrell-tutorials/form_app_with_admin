@@ -1,0 +1,85 @@
+namespace Project.Admin.Frontend.Components.LoginPage;
+
+use Runtime.Crypt.JWT;
+use Runtime.Web.ApiResult;
+use Runtime.Web.RenderContainer;
+use Runtime.Web.JsonResponse;
+use Project.Admin.Frontend.Components.LoginPage.LoginPageModel;
+
+
+class LoginMiddleware
+{
+	const static string AUTH_KEY = "admin_auth";
+	
+	
+	/**
+	 * Render login page
+	 */
+	static void renderLoginPage(RenderContainer container)
+	{
+		string route_name = container.route ? container.route.name : "";
+		if (route_name == "runtime:web:api")
+		{
+			ApiResult api_result = new ApiResult;
+			api_result.fail({
+				"code": rtl::ERROR_AUTH,
+				"message": "Auth required",
+			});
+			container.setResponse(new JsonResponse(api_result.getContent()));
+			return;
+		}
+		
+		container.createLayout("default");
+		container.renderPageModel(classof LoginPageModel);
+	}
+	
+	
+	/**
+	 * Returns true if login api
+	 */
+	static bool isLoginApi(RenderContainer container)
+	{
+		string route_name = container.route ? container.route.name : "";
+		if (route_name != "runtime:web:api") return false;
+		string service = container.request.payload.get("service");
+		string api_name = container.request.payload.get("api_name");
+		string method_name = container.request.payload.get("method_name");
+		if (service != "app") return false;
+		if (api_name != "admin.login") return false;
+		return true;
+	}
+	
+	
+	/**
+	 * Check auth
+	 */
+	static void checkAuth(RenderContainer container)
+	{
+		if (static::isLoginApi(container)) return;
+		if (not container.request.cookies.has(static::AUTH_KEY))
+		{
+			static::renderLoginPage(container);
+			return;
+		}
+		
+		string jwt_public_key = @.env("JWT_PUBLIC_KEY");
+		string jwt_key = container.request.cookies.get(static::AUTH_KEY);
+		Dict data = JWT::decode(jwt_key, jwt_public_key, "RS256");
+		if (not data)
+		{
+			static::renderLoginPage(container);
+			return;
+		}
+		if (not data.get("valid"))
+		{
+			static::renderLoginPage(container);
+			return;
+		}
+		
+		/* Setup auth */
+		container.backend_storage.set("admin_auth", {
+			"key": jwt_key,
+			"data": data,
+		});
+	}
+}

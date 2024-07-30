@@ -1,20 +1,8 @@
 <?php
 return function($loader)
 {
-	/* Add modules */
-	$loader->modules[] = "Project.App";
-	$loader->modules[] = "Project.Admin";
-	
 	/* Enable constructor */
-	if (isset($_SERVER["CONSTRUCTOR"]))
-	{
-		$baylang_path = "/srv";
-		if ($baylang_path)
-		{
-			$loader->include($baylang_path . "/baylang.php");
-		}
-		$loader->setEnv("CONSTRUCTOR", "true");
-	}
+	$loader->include("/src/baylang.php");
 	
 	/* Setup environments */
 	$loader->setEnv("LOCALE", "en");

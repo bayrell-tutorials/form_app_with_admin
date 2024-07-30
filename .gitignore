@@ -2,3 +2,4 @@
 src/env.php
 src/public/assets
 !src/public/assets/vue.runtime.global.prod.js
+test

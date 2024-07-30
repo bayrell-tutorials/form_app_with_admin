@@ -1,6 +1,9 @@
 [submodule "src/plugins/Runtime"]
 	path = src/plugins/Runtime
 	url = https://github.com/bayrell/Runtime
+[submodule "src/plugins/Runtime.Crypt"]
+	path = src/plugins/Runtime.Crypt
+	url = https://github.com/bayrell/Runtime.Crypt
 [submodule "src/plugins/Runtime.Web"]
 	path = src/plugins/Runtime.Web
 	url = https://github.com/bayrell/Runtime.Web

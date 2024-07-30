@@ -1,0 +1,38 @@
+namespace Project.Admin.Frontend.Components.Layout;
+
+use Runtime.Serializer;
+use Runtime.Web.BaseLayoutModel;
+use Project.Admin.Frontend.Components.Layout.DefaultLayout;
+
+
+class DefaultLayoutModel extends BaseLayoutModel
+{
+	string component = classof DefaultLayout;
+    
+    
+    /**
+	 * Init widget settings
+	 */
+	void initWidget(Dict params)
+	{
+		parent(params);
+	}
+	
+	
+	/**
+	 * Process frontend data
+	 */
+	void serialize(Serializer serializer, Map data)
+	{
+		parent(serializer, data);
+	}
+	
+	
+	/**
+	 * Returns footer components
+	 */
+	Collection<string> getFooterComponents() =>
+	[
+		"Project.Admin.Frontend.Components.Blocks.Scripts",
+	];
+}

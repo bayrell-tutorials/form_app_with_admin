@@ -1,0 +1,82 @@
+namespace Project.Admin.Frontend.Components.LoginPage;
+
+use Runtime.Callback;
+use Runtime.Entity.Factory;
+use Runtime.Web.BasePageModel;
+use Runtime.Web.RenderContainer;
+use Runtime.Widget.ButtonModel;
+use Runtime.Widget.Form.FormMessage;
+use Runtime.Widget.Form.FormSubmitModel;
+use Project.Admin.Frontend.Components.LoginPage.LoginPage;
+
+
+class LoginPageModel extends BasePageModel
+{
+	string component = classof LoginPage;
+	
+	
+	/**
+	 * Init widget
+	 */
+	void initWidget(Dict params)
+	{
+		parent(params);
+		this.form = this.addWidget(
+			classof FormSubmitModel,
+			{
+				"storage": new Factory(
+					"Runtime.Widget.Form.FormSubmitStorage",
+					{
+						"api_name": "admin.login",
+						"action": "actionLogin",
+					}
+				),
+				"fields":
+				[
+					{
+						"name": "login",
+						"label": "Login",
+						"component": "Runtime.Widget.Input",
+					},
+					{
+						"name": "password",
+						"label": "Password",
+						"component": "Runtime.Widget.Input",
+						"props":
+						{
+							"type": "password",
+						},
+					},
+				],
+				"events":
+				{
+					"submit": new Callback(this, "onFormSubmit"),
+				}
+			}
+		);
+		ButtonModel submit_button = this.form.bottom_buttons.getWidget("submit");
+		submit_button.content = "Login";
+		submit_button.styles = ["default", "large"];
+	}
+	
+	
+	/**
+	 * Build title
+	 */
+	void buildTitle(RenderContainer container)
+	{
+		this.layout.setPageTitle("Login page");
+	}
+	
+	
+	/**
+	 * Submit form
+	 */
+	void onFormSubmit(FormMessage message)
+	{
+		if (message.result.isSuccess())
+		{
+			document.location = document.location;
+		}
+	}
+}

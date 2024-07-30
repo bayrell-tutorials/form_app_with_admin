@@ -3,7 +3,7 @@
 <use name="Runtime.Widget.Text" />
 
 <template>
-	<div class="page">
+	<div class="admin_page">
 		<Text content="Admin page" class="page_text" />
 	</div>
 </template>

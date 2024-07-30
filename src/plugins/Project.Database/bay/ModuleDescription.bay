@@ -1,0 +1,27 @@
+namespace Project.Database;
+
+use Runtime.Entity.Hook;
+use Runtime.ORM.Annotations.Database;
+use Runtime.ORM.Factory.MySQLFactory;
+
+
+class ModuleDescription
+{
+	pure string getModuleName() => "Project.Database";
+	pure string getModuleVersion() => "0.0.1";
+	pure Dict<string> requiredModules() =>
+	{
+		"Runtime.ORM": "*",
+	};
+	pure Collection<Dict> entities() =>
+	[
+		new Database("Project.App.Backend.Database.Schema"),
+		new MySQLFactory({
+			"name": "default",
+			"host": @.env("MYSQL_HOST"),
+			"login": @.env("MYSQL_LOGIN"),
+			"password": @.env("MYSQL_PASSWORD"),
+			"database": @.env("MYSQL_DATABASE"),
+		}),
+	];
+}

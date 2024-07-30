@@ -1,5 +1,8 @@
 namespace Project.Admin.Frontend;
 
+use Runtime.Callback;
+use Runtime.Entity.Hook;
+use Runtime.Web.Annotations.Middleware;
 use Runtime.Web.Annotations.Route;
 use Runtime.Web.Annotations.SetupLayout;
 use Runtime.Web.Annotations.Widget;
@@ -17,9 +20,13 @@ class ModuleDescription
 	pure Collection<Dict> entities() =>
 	[
 		#ifdef BACKEND then
+		new Middleware(new Callback("Project.Admin.Frontend.Components.LoginPage.LoginMiddleware", "checkAuth")),
 		new Route("Project.Admin.Frontend.Routes"),
 		#endif
-		new SetupLayout{
+		new Hook("Runtime.Web.Hooks.ApiPrefix", {"prefix": "/admin"}),
+		new SetupLayout
+		{
+			"default": "Project.Admin.Frontend.Components.Layout.DefaultLayoutModel",
 			"admin": "Project.Admin.Frontend.Components.Layout.AdminLayoutModel",
 		},
 		new Widget("Project.Admin.Frontend.Components.AdminPage.AdminPageModel"),

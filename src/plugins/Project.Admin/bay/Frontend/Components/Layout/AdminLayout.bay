@@ -2,6 +2,8 @@
 	extends="Runtime.Web.DefaultLayout"
 >
 
+<use name="Runtime.Web.ApiResult" />
+<use name="Runtime.Widget.Button" component="true" />
 <use name="Runtime.Widget.Menu" component="true" />
 
 <style>
@@ -40,6 +42,10 @@ body, html {
 .layout__menu_wrap .layout__title{
 	padding-left: 10px;
 }
+.logout_button{
+	text-align: center;
+	margin-top: 20px;
+}
 </style>
 
 
@@ -48,6 +54,9 @@ body, html {
 		<div class="layout__menu_wrap">
 			<div class="layout__title">Menu</div>
 			<Menu items={{ this.getMenu() }} />
+			<div class="logout_button">
+				<Button styles=["danger", "large"] @event:click={{ this.onLogoutClick }}>Logout</Button>
+			</div>
 		</div>
 		<div class="layout__content_wrap">
 			<h1 class="layout__title">{{ this.layout.title }}</h1>
@@ -58,7 +67,6 @@ body, html {
 
 
 <script>
-
 
 /**
  * Returns menu
@@ -80,6 +88,22 @@ Collection<string> getMenu()
 	];
 	
 	return arr;
+}
+
+
+/**
+ * Logout click
+ */
+async void onLogoutClick()
+{
+	ApiResult res = await this.layout.callApi({
+		"api_name": "admin.login",
+		"method_name": "actionLogout",
+	});
+	if (res.isSuccess())
+	{
+		document.location = document.location;
+	}
 }
 
 </script>
