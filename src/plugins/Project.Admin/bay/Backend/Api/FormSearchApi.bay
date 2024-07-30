@@ -1,0 +1,61 @@
+namespace Project.Admin.Backend.Api;
+
+use Runtime.fs;
+use Runtime.ORM.Connection;
+use Runtime.ORM.Relation;
+use Runtime.ORM.Query;
+use Runtime.ORM.QueryResult;
+use Runtime.Web.Annotations.ApiMethod;
+use Runtime.Widget.Crud.SearchApi;
+
+
+class FormSearchApi extends SearchApi
+{
+	/**
+	 * Returns api name
+	 */
+	static string getApiName() => "admin.form::search";
+	
+	
+	/**
+	 * Action search
+	 */
+	@ApiMethod
+	async void actionSearch()
+	{
+		int page = this.post_data.get("page", 0);
+		int limit = this.post_data.get("limit");
+		
+		/* Build query */
+		Query q = new Query()
+			.select([
+				"forms_data.id",
+				"forms_data.data",
+				"forms_data.gmtime_add"
+			])
+			.from("forms_data")
+			.orderBy("gmtime_add", "desc")
+			.page(page)
+			.limit(limit)
+		;
+		
+		/* Get query result */
+		Connection conn = Connection::get();
+		QueryResult result = await conn.fetchAll(q);
+		
+		/* Get items */
+		Collection<Dict> items = result.map(
+			Dict (Dict item) => item.intersect(["id", "data", "gmtime_add"])
+		);
+		
+		/* Set result */
+		this.success({
+			"data": {
+				"items": items,
+				"page": page,
+				"pages": result.pages,
+				"limit": limit,
+			}
+		})
+	}
+}

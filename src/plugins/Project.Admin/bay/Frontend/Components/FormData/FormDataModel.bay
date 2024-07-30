@@ -1,15 +1,167 @@
 namespace Project.Admin.Frontend.Components.FormData;
 
+use Runtime.Entity.Factory;
 use Runtime.Web.BasePageModel;
+use Runtime.Web.ModelFactory;
 use Runtime.Web.RenderContainer;
+use Runtime.Widget.ButtonModel;
+use Runtime.Widget.RowButtonsModel;
+use Runtime.Widget.Dialog.DialogModel;
+use Runtime.Widget.Form.FormDeleteStorage;
+use Runtime.Widget.Form.FormModel;
+use Runtime.Widget.Form.FormSubmitStorage;
+use Runtime.Widget.Table.TableDialogModel;
 
 
 class FormDataModel extends BasePageModel
 {
 	string component = "Project.Admin.Frontend.Components.FormData.FormData";
+	TableDialogModel table = null;
 	void initWidget(Dict params)
 	{
 		parent(params);
+		
+		/* Add table */
+		this.table = this.addWidget(
+			classof TableDialogModel,
+			{
+				"widget_name": "table",
+				"get_title": void (Dict params)
+				{
+					string action = params.get("action");
+					Dict item = params.get("item");
+					if (action == "add")
+					{
+						return "Add item";
+					}
+					if (action == "edit")
+					{
+						return "Show item " ~ item.get("id");
+					}
+					if (action == "delete")
+					{
+						return "Delete item " ~ item.get("id");
+					}
+					return "";
+				},
+				"styles": ["border"],
+				
+				/* Table storage */
+				"storage": new Factory
+				(
+					"Runtime.Widget.Table.TableStorage",
+					{
+						"api_name": "admin.form::search",
+					}
+				),
+				
+				/* Edit form */
+				"edit_form": new ModelFactory(
+					classof FormModel,
+					{
+						"widget_name": "edit_form",
+						"primary_key": ["id"],
+						"fields":
+						[
+							{
+								"name": "name",
+								"label": "Name",
+								"component": "Runtime.Widget.Input",
+								"calculate": string (Dict item) => item.get("data").get("name"),
+								"props":
+								{
+									"readonly": true,
+								}
+							},
+							{
+								"name": "phone",
+								"label": "Phone",
+								"component": "Runtime.Widget.Input",
+								"calculate": string (Dict item) => item.get("data").get("phone"),
+								"props":
+								{
+									"readonly": true,
+								}
+							},
+							{
+								"name": "email",
+								"label": "Email",
+								"component": "Runtime.Widget.Input",
+								"calculate": string (Dict item) => item.get("data").get("email"),
+								"props":
+								{
+									"readonly": true,
+								}
+							},
+							{
+								"name": "question",
+								"label": "Question",
+								"component": "Runtime.Widget.TextArea",
+								"calculate": string (Dict item) => item.get("data").get("question"),
+								"props":
+								{
+									"readonly": true,
+								}
+							},
+						],
+					}
+				),
+				
+				/* Table fields */
+				"fields":
+				[
+					{
+						"name": "row_number",
+					},
+					{
+						"name": "name",
+						"label": "Name",
+						"component": "Runtime.Widget.Label",
+						"calculate": string (Dict item) => item.get("data").get("name"),
+					},
+					{
+						"name": "phone",
+						"label": "Phone",
+						"component": "Runtime.Widget.Label",
+						"calculate": string (Dict item) => item.get("data").get("phone"),
+					},
+					{
+						"name": "email",
+						"label": "Email",
+						"component": "Runtime.Widget.Label",
+						"calculate": string (Dict item) => item.get("data").get("email"),
+					},
+					{
+						"name": "gmtime_add",
+						"label": "Date",
+						"component": "Runtime.Widget.Label",
+						"calculate": string (Dict item)
+						{
+							DateTime gmtime_add = item.get("gmtime_add");
+							if (not gmtime_add) return "";
+							return gmtime_add.normalize().getDateTimeString();
+						}
+					},
+					{
+						"name": "row_buttons",
+						"model": new ModelFactory("Runtime.Widget.Table.TableRowButtonsModel"),
+					},
+				],
+			}
+		);
+		
+		/* Change edit button */
+		RowButtonsModel row_buttons = this.table.getWidget("row_buttons");
+		ButtonModel edit_button = row_buttons.getWidget("edit_button");
+		edit_button.content = "View";
+		
+		/* Remove delete button */
+		RowButtonsModel row_buttons = this.table.getWidget("row_buttons");
+		row_buttons.removeItemByName("delete_button");
+		
+		/* Remove save button */
+		DialogModel save_dialog = this.table.getWidget("save_dialog");
+		save_dialog.buttons.removeItemByName("confirm_button");
 	}
 	void buildTitle(RenderContainer container)
 	{

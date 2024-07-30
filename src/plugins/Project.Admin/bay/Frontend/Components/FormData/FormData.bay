@@ -4,7 +4,7 @@
 
 <template>
 	<div class="page">
-		<Text content="Forms data model" class="page_text" />
+		%render this.renderWidget(this.model.table);
 	</div>
 </template>
 

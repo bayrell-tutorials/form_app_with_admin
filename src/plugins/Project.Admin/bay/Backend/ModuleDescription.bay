@@ -1,5 +1,6 @@
 namespace Project.Admin.Backend;
 
+use Runtime.Web.Annotations.Api;
 use Runtime.Web.Annotations.Route;
 use Runtime.Web.Annotations.SetupLayout;
 use Runtime.Web.Annotations.Widget;
@@ -15,5 +16,6 @@ class ModuleDescription
 	};
 	pure Collection<Dict> entities() =>
 	[
+		new Api("Project.Admin.Backend.Api.FormSearchApi"),
 	];
 }
