@@ -2,17 +2,17 @@
  *  Scripts
 -->
 
-<class name="Project.App.Frontend.Components.Blocks.Scripts">
+<class name="Project.Admin.Frontend.Components.Blocks.Scripts">
 
-<use name="Project.App.Frontend.ModuleDescription" />
+<use name="Project.Admin.Frontend.ModuleDescription" />
 
 <template>
 	<script type='text/javascript' id='vue-runtime-js'
 		src={{ this.layout.assets('/assets/vue.runtime.global.js') }}></script>
 	<script type='text/javascript' id='app-runtime-js'
 		src={{ this.layout.assets('assets/runtime.js?ver=' ~ ModuleDescription::getModuleVersion()) }}></script>
-	<script type='text/javascript' id='app-js'
-		src={{ this.layout.assets('assets/app.js?ver=' ~ ModuleDescription::getModuleVersion()) }}></script>
+	<script type='text/javascript' id='admin-js'
+		src={{ this.layout.assets('assets/admin.js?ver=' ~ ModuleDescription::getModuleVersion()) }}></script>
 	%if (@.env("CONSTRUCTOR"))
 	{
 		<script type='text/javascript' id='app-js'

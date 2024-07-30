@@ -1,15 +1,15 @@
-namespace Project.App;
+namespace Project.Admin;
 
 class ModuleDescription
 {
-	pure string getModuleName() => "Project.App";
+	pure string getModuleName() => "Project.Admin";
 	pure string getModuleVersion() => "0.0.1";
 	pure Dict<string> requiredModules() =>
 	{
 		#ifdef BACKEND then
-		"Project.App.Backend": "*",
+		"Project.Admin.Backend": "*",
 		#endif
-		"Project.App.Frontend": "*",
+		"Project.Admin.Frontend": "*",
 	};
 	pure Collection<Dict> entities() =>
 	[

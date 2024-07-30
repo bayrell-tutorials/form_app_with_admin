@@ -1,0 +1,87 @@
+<class name="Project.Admin.Frontend.Components.Layout.AdminLayout"
+	extends="Runtime.Web.DefaultLayout"
+>
+
+<use name="Runtime.Widget.Menu" component="true" />
+
+<style>
+body, html {
+	font-family: var(--widget-font-family);
+	font-size: var(--widget-font-size);
+	line-height: var(--widget-line-height);
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+.layout{
+	position: relative;
+	display: flex;
+	align-items: stretch;
+	min-height: 100%;
+}
+.layout__menu_wrap{
+	position: relative;
+	width: 200px;
+	padding-top: 10px;
+	padding-right: 10px;
+}
+.layout__content_wrap{
+	position: relative;
+	width: calc(100% - 200px);
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.layout__title{
+	font-size: 16px;
+	font-weight: normal;
+	padding-bottom: 10px;
+	margin: 0;
+}
+.layout__menu_wrap .layout__title{
+	padding-left: 10px;
+}
+</style>
+
+
+<template>
+	<div class="layout" class={{ "layout--" ~ this.layout.layout_name }}>
+		<div class="layout__menu_wrap">
+			<div class="layout__title">Menu</div>
+			<Menu items={{ this.getMenu() }} />
+		</div>
+		<div class="layout__content_wrap">
+			<h1 class="layout__title">{{ this.layout.title }}</h1>
+			%render this.renderCurrentPage();
+		</div>
+	</div>
+</template>
+
+
+<script>
+
+
+/**
+ * Returns menu
+ */
+Collection<string> getMenu()
+{
+	Collection arr =
+	[
+		{
+			"label": "Admin",
+			"name": "admin:index",
+			"href": this.layout.url("admin:index")
+		},
+		{
+			"label": "Form",
+			"name": "admin:form_data:list",
+			"href": this.layout.url("admin:form_data:list")
+		}
+	];
+	
+	return arr;
+}
+
+</script>
+
+</class>

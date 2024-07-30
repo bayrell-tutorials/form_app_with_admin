@@ -1,0 +1,11 @@
+<class name="Project.Admin.Frontend.Components.FormData.FormData">
+
+<use name="Runtime.Widget.Text" />
+
+<template>
+	<div class="page">
+		<Text content="Forms data model" class="page_text" />
+	</div>
+</template>
+
+</class>

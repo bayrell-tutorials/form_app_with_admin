@@ -1,23 +1,33 @@
 {
-    "name": "Project.Admin",
-    "assets": [
-        "Frontend/ModuleDescription.bay",
-        "Frontend/AdminPage/AdminPageModel.bay",
-        "Frontend/AdminPage/AdminPage.bay"
-    ],
-    "require": [
-        "Runtime",
-        "Runtime.Web"
-    ],
-    "groups": [
-        "app"
-    ],
-    "src": ".\/bay",
-    "dest": {
-        "php": ".\/php",
-        "es6": ".\/es6"
-    },
-    "allow": [
-        "\\.bay$"
-    ]
+	"name": "Project.Admin",
+	"assets": [
+		"ModuleDescription.bay"
+	],
+	"groups": [
+		"admin"
+	],
+	"modules":
+	[
+		{
+			"src": "bay/Backend",
+			"type": "module"
+		},
+		{
+			"src": "bay/Frontend",
+			"type": "module"
+		}
+	],
+	"src": ".\/bay",
+	"dest": {
+		"php": ".\/php",
+		"es6": ".\/es6"
+	},
+	"allow": [
+		"\\.bay$"
+	],
+	"exclude":
+	[
+		"Backend/",
+		"Frontend/"
+	]
 }

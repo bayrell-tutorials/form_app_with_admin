@@ -1,0 +1,16 @@
+{
+	"name": "Project.App.Backend",
+	"assets":
+	[
+	],
+	"src": "./",
+	"dest":
+	{
+		"php": "./../../php/Backend",
+		"es6": "./../../es6/Backend"
+	},
+	"allow":
+	[
+		"\\.bay$"
+	]
+}

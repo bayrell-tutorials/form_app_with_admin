@@ -1,0 +1,18 @@
+namespace Project.Admin.Frontend.Components.FormData;
+
+use Runtime.Web.BasePageModel;
+use Runtime.Web.RenderContainer;
+
+
+class FormDataModel extends BasePageModel
+{
+	string component = "Project.Admin.Frontend.Components.FormData.FormData";
+	void initWidget(Dict params)
+	{
+		parent(params);
+	}
+	void buildTitle(RenderContainer container)
+	{
+		this.layout.setPageTitle("Widget page");
+	}
+}

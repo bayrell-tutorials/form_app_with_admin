@@ -3,7 +3,7 @@ return function($loader)
 {
 	/* Add modules */
 	$loader->modules[] = "Project.App";
-	//$loader->modules[] = "Project.Admin";
+	$loader->modules[] = "Project.Admin";
 	
 	/* Enable constructor */
 	if (isset($_SERVER["CONSTRUCTOR"]))

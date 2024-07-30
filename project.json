@@ -32,6 +32,13 @@
         },
         {
             "type": "js",
+            "dest": "src\/public\/assets\/admin.js",
+            "modules": [
+                "@admin"
+            ]
+        },
+        {
+            "type": "js",
             "dest": "src\/public\/assets\/runtime.js",
             "modules": [
                 "@runtime",

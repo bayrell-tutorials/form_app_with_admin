@@ -1,0 +1,30 @@
+{
+	"name": "Project.App.Frontend",
+	"assets":
+	[
+		"Components/Blocks/CSS.bay",
+		"Components/IndexPage/IndexPage.bay",
+		"Components/IndexPage/IndexPageModel.bay",
+		"Components/Layout/DefaultLayout.bay",
+		"Components/Layout/DefaultLayoutModel.bay",
+		"Components/NotFoundPage/NotFoundPage.bay",
+		"Components/NotFoundPage/NotFoundPageModel.bay",
+		"ModuleDescription.bay"
+	],
+	"require": [
+		"Runtime.Web"
+	],
+	"groups": [
+		"app"
+	],
+	"src": "./",
+	"dest":
+	{
+		"php": "./../../php/Frontend",
+		"es6": "./../../es6/Frontend"
+	},
+	"allow":
+	[
+		"\\.bay$"
+	]
+}

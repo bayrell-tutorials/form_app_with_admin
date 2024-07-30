@@ -1,0 +1,19 @@
+namespace Project.Admin.Backend;
+
+use Runtime.Web.Annotations.Route;
+use Runtime.Web.Annotations.SetupLayout;
+use Runtime.Web.Annotations.Widget;
+
+
+class ModuleDescription
+{
+	pure string getModuleName() => "Project.Admin.Backend";
+	pure string getModuleVersion() => "0.0.1";
+	pure Dict<string> requiredModules() =>
+	{
+		"Runtime.ORM": "*",
+	};
+	pure Collection<Dict> entities() =>
+	[
+	];
+}

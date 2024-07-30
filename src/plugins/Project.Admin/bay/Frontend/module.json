@@ -1,0 +1,26 @@
+{
+    "name": "Project.Admin.Frontend",
+    "assets": [
+        "Components\/AdminPage\/AdminPage.bay",
+        "Components\/AdminPage\/AdminPageModel.bay",
+        "Components\/FormData\/FormDataModel.bay",
+        "Components\/FormData\/FormData.bay",
+        "Components\/Layout\/AdminLayout.bay",
+        "Components\/Layout\/AdminLayoutModel.bay",
+        "ModuleDescription.bay"
+    ],
+    "require": [
+        "Runtime.Web"
+    ],
+    "groups": [
+        "admin"
+    ],
+    "src": ".\/",
+    "dest": {
+        "php": ".\/..\/..\/php\/Frontend",
+        "es6": ".\/..\/..\/es6\/Frontend"
+    },
+    "allow": [
+        "\\.bay$"
+    ]
+}

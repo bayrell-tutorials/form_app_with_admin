@@ -1,7 +1,9 @@
 namespace Project.Admin.Frontend;
 
 use Runtime.Web.Annotations.Route;
+use Runtime.Web.Annotations.SetupLayout;
 use Runtime.Web.Annotations.Widget;
+
 
 class ModuleDescription
 {
@@ -17,6 +19,10 @@ class ModuleDescription
 		#ifdef BACKEND then
 		new Route("Project.Admin.Frontend.Routes"),
 		#endif
+		new SetupLayout{
+			"admin": "Project.Admin.Frontend.Components.Layout.AdminLayoutModel",
+		},
 		new Widget("Project.Admin.Frontend.Components.AdminPage.AdminPageModel"),
+		new Widget("Project.Admin.Frontend.Components.FormData.FormDataModel"),
 	];
 }

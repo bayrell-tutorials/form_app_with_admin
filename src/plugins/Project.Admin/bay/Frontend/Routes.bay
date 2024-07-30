@@ -29,6 +29,12 @@ class Routes extends BaseRoute
 				"name": "admin:index",
 				"model": "Project.Admin.Frontend.Components.AdminPage.AdminPageModel",
 			},
+			new RouteInfo
+			{
+				"uri": "/admin/form_data/",
+				"name": "admin:form_data:list",
+				"model": "Project.Admin.Frontend.Components.FormData.FormDataModel",
+			},
 		];
 	}
 }
