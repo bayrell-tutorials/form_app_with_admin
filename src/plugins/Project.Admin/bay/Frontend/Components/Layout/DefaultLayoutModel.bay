@@ -26,13 +26,4 @@ class DefaultLayoutModel extends BaseLayoutModel
 	{
 		parent(serializer, data);
 	}
-	
-	
-	/**
-	 * Returns footer components
-	 */
-	Collection<string> getFooterComponents() =>
-	[
-		"Project.Admin.Frontend.Components.Blocks.Scripts",
-	];
 }

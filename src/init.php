@@ -2,7 +2,7 @@
 return function($loader)
 {
 	/* Enable constructor */
-	$loader->include("/src/baylang.php");
+	$loader->include("/srv/baylang.php");
 	
 	/* Setup environments */
 	$loader->setEnv("LOCALE", "en");

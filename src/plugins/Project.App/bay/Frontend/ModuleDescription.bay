@@ -25,6 +25,9 @@ class ModuleDescription
 	[
 		#ifdef BACKEND then
 		
+		new FooterComponents([
+			"Project.App.Frontend.Components.Blocks.Scripts",
+		]),
 		new PageNotFound("Project.App.Frontend.Components.NotFoundPage.NotFoundPageModel"),
 		new Route("Project.App.Frontend.Routes"),
 		

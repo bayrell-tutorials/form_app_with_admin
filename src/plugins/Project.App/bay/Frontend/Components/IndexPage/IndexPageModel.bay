@@ -42,10 +42,9 @@ class IndexPageModel extends BasePageModel
 					"name": "question",
 					"label": "Question",
 					"component": "Runtime.Widget.TextArea",
-					"props":
-					{
+					"props": {
 						"height": "200px",
-					}
+					},
 				},
 			],
 		});

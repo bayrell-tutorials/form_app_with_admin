@@ -2,6 +2,7 @@ namespace Project.Admin.Frontend;
 
 use Runtime.Callback;
 use Runtime.Entity.Hook;
+use Runtime.Web.Annotations.FooterComponents;
 use Runtime.Web.Annotations.Middleware;
 use Runtime.Web.Annotations.Route;
 use Runtime.Web.Annotations.SetupLayout;
@@ -20,7 +21,12 @@ class ModuleDescription
 	pure Collection<Dict> entities() =>
 	[
 		#ifdef BACKEND then
-		new Middleware(new Callback("Project.Admin.Frontend.Components.LoginPage.LoginMiddleware", "checkAuth")),
+		new FooterComponents([
+			"Project.Admin.Frontend.Components.Blocks.Scripts",
+		]),
+		new Middleware(new Callback(
+			"Project.Admin.Frontend.Components.LoginPage.LoginMiddleware", "checkAuth"
+		)),
 		new Route("Project.Admin.Frontend.Routes"),
 		#endif
 		new Hook("Runtime.Web.Hooks.ApiPrefix", {"prefix": "/admin"}),
